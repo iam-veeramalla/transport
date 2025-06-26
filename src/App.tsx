@@ -55,7 +55,10 @@ function App() {
           <div className="w-1/4 bg-white/10 border-r border-white/10 p-4 flex flex-col items-start justify-start">
             <h2 className="text-sm font-semibold text-gray-300 mb-2">Last Question</h2>
             {lastUserMessage ? (
-              <div className="text-gray-100 text-base break-words">{lastUserMessage.content}</div>
+              <div
+                className="text-gray-100 text-base break-words"
+                dangerouslySetInnerHTML={{ __html: lastUserMessage.content }}
+              />
             ) : (
               <div className="text-gray-400 text-sm">No question asked yet.</div>
             )}
