@@ -11,7 +11,14 @@ function App() {
   const { messages, isLoading, sendMessage, clearChat } = useChat(selectedModel);
 
   // Get the last user message (question)
-  const lastUserMessage = [...messages].reverse().find(m => m.role === 'user');
+  const lastUserMessage = React.useMemo(() => {
+    for (let i = messages.length - 1; i >= 0; i--) {
+      if (messages[i].role === 'user') {
+        return messages[i];
+      }
+    }
+    return undefined;
+  }, [messages]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
