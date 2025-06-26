@@ -10,9 +10,6 @@ function App() {
   const [selectedModel, setSelectedModel] = React.useState('gpt-4-turbo');
   const { messages, isLoading, sendMessage, clearChat } = useChat(selectedModel);
 
-  // Get the last user message (question)
-  const lastUserMessage = [...messages].reverse().find(m => m.role === 'user');
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
       <div className="container mx-auto px-4 py-6 h-screen flex flex-col max-w-4xl">
@@ -49,29 +46,16 @@ function App() {
           />
         </div>
 
-        {/* Main Content with Sidebar */}
-        <div className="flex-1 flex bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden">
-          {/* Left Sidebar for Last Question */}
-          <div className="w-1/4 bg-white/10 border-r border-white/10 p-4 flex flex-col items-start justify-start">
-            <h2 className="text-sm font-semibold text-gray-300 mb-2">Last Question</h2>
-            {lastUserMessage ? (
-              <div className="text-gray-100 text-base break-words">{lastUserMessage.content}</div>
-            ) : (
-              <div className="text-gray-400 text-sm">No question asked yet.</div>
-            )}
-          </div>
-
-          {/* Chat Area */}
-          <div className="flex-1 flex flex-col">
-            <ChatArea messages={messages} isLoading={isLoading} />
-            {/* Input Area */}
-            <div className="p-4 border-t border-white/10">
-              <ChatInput
-                onSendMessage={sendMessage}
-                disabled={isLoading || !selectedModel}
-                placeholder={selectedModel ? "Ask me anything..." : "Select a model to start chatting"}
-              />
-            </div>
+        {/* Chat Container */}
+        <div className="flex-1 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl flex flex-col overflow-hidden">
+          <ChatArea messages={messages} isLoading={isLoading} />
+          {/* Input Area */}
+          <div className="p-4 border-t border-white/10">
+            <ChatInput
+              onSendMessage={sendMessage}
+              disabled={isLoading || !selectedModel}
+              placeholder={selectedModel ? "Ask me anything..." : "Select a model to start chatting"}
+            />
           </div>
         </div>
 
