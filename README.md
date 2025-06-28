@@ -208,4 +208,4 @@ For support and questions:
 - [ ] Dark/light theme toggle
 - [ ] Advanced formatting options
 - [ ] Plugin system for extensions
-- [ ] rishabh
+- [ ] rishabh alchetti
